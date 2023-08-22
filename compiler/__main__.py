@@ -1,7 +1,5 @@
-from lexer import Lexer
+from core import init
 
 
-tokens = Lexer("var carla = karla;").tokenize().get_tokens()
-
-for token in tokens:
-    print(token)
+if __name__ == '__main__':
+    init()
