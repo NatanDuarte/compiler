@@ -19,7 +19,7 @@ python .\main.py -f path/to/file
 ```python
 start # delimits the start of programs scope
 
-var -> identifier -> data_type -> attribution -> IntegerLiteral | FloatLiteral -> end_statement
+var -> identifier -> data_type -> attribution -> identifier | IntegerLiteral | FloatLiteral -> end_statement
 
 identifier -> attribution -> IntegerLiteral | FloatLiteral -> end_statement
 
