@@ -6,5 +6,11 @@ class Compiler:
     @staticmethod
     def compile(program:str) -> str:
         tokens = Tokenizer().tokenize(program)
+        for token in tokens:
+            print(token)
+        print()
+
+        print('------------------------------')
+        print()
         parser = Parser(tokens)
-        return tokens, parser.parse()
+        return parser.parse()

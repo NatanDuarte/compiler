@@ -7,10 +7,7 @@ def process_interactive_mode():
         program = input(">> ")
         if program.lower() == "exit":
             break
-        out, recognized = Compiler().compile(program)
-        # print(f"{dumps(out, indent=2)}")
-        for x in out:
-            print(x)
+        recognized = Compiler().compile(program)
         print('------------------------------')
         print(f'Recognized: {recognized}')
 
@@ -18,10 +15,7 @@ def process_file_mode(file_path):
     try:
         with open(file_path, 'r') as file:
             file_content = file.read()
-            out, recognized = Compiler().compile(file_content)
-            # print(f"{dumps(out, indent=2)}")
-            for x in out:
-                print(x)
+            recognized = Compiler().compile(file_content)
             print('------------------------------')
             print(f'Recognized: {recognized}')
 

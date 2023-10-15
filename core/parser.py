@@ -1,5 +1,6 @@
 class Parser:
     def __init__(self, tokens):
+        self.is_error = False
         self.tokens = tokens
         self.current_token = None
         self.index = 0
@@ -22,10 +23,7 @@ class Parser:
     def parse(self):
         self.advance()
         self.program()
-        if self.current_token["kind"] == "end":
-            return True
-        else:
-            return False
+        return self.current_token["kind"] == "end" and not self.is_error
 
     def advance(self):
         if self.index < self.token_count:
@@ -39,6 +37,8 @@ class Parser:
 
     def commands(self):
         while self.current_token["kind"] in ["var", "identifier", "write", "attribution"]:
+            if self.is_error:
+                break
             if self.current_token["kind"] == "var":
                 self.parse_var()
             elif self.current_token["kind"] == "write":
@@ -98,7 +98,7 @@ class Parser:
 
     def expression(self):
         self.term()
-        while self.current_token["kind"] != "end_statement":
+        while self.current_token["kind"] != "end_statement" and not self.is_error:
             if self.current_token["kind"] == "right_parenthesis":
                 break
             if self.current_token["kind"] == "operator":
@@ -117,7 +117,8 @@ class Parser:
         if self.current_token["kind"] == expected_kind:
             self.advance()
         else:
-            self.error(f"Expected '{expected_kind}'")
+            self.error(f"Got '{self.current_token['value']}', Expected '{expected_kind}'")
 
     def error(self, message):
-        raise Exception(f"Parser error at line {self.current_token}: {message}")
+        print(f"ERROR: Parser error at line: {message}")
+        self.is_error = True
