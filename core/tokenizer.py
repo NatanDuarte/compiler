@@ -1,22 +1,20 @@
 from core.util import is_number, is_letter
 
+
 reserved_words = [
-    'init', 'end', 'var'
+    'init', 'end', 'var', 'write'
 ]
 
 data_types = [
     'int', 'float'
 ]
 
-functions = {
-    'write': lambda x: print(x)
-}
-
 class Tokenizer:
     @staticmethod
     def tokenize(string:str) -> list:
         string += '\n'
         current = 0
+        position = 0
         line = 1
         tokens = []
 
@@ -26,30 +24,32 @@ class Tokenizer:
             if char == "-":
                 tokens.append({
                     'kind': 'operator',
-                    'value': '+',
-                    'position': current,
+                    'value': '-',
+                    'position': position,
                     'line': line
                 })
 
                 current += 1
+                position += 1
                 continue
 
             if char == ";":
                 tokens.append({
                     'kind': 'end_statement',
                     'value': ';',
-                    'position': current,
+                    'position': position,
                     'line': line
                 })
 
                 current += 1
+                position += 1
                 continue
 
             if char == "+":
                 tokens.append({
                     'kind': 'operator',
                     'value': '+',
-                    'position': current,
+                    'position': position,
                     'line': line
                 })
 
@@ -60,40 +60,21 @@ class Tokenizer:
                 tokens.append({
                     'kind': 'attribution',
                     'value': '=',
-                    'position': current,
+                    'position': position,
                     'line': line
                 })
 
                 current += 1
-                continue
-
-            if char == "(":
-                tokens.append({
-                    'kind': 'left_parenthesis',
-                    'value': '(',
-                    'position': current,
-                    'line': line
-                })
-                
-                current += 1
-                continue
-
-            if char == ")":
-                tokens.append({
-                    'kind': 'right_parenthesis',
-                    'value': ')',
-                    'position': current,
-                    'line': line
-                })
-
-                current += 1
+                position += 1
                 continue
 
             if char == " ":
                 current += 1
+                position += 1
                 continue
 
             if char == "\n" or char == "\r":
+                position = 0
                 current += 1
                 line += 1
                 continue
@@ -104,22 +85,25 @@ class Tokenizer:
                 while is_number(char):
                     value += char
                     current += 1
+                    position += 1
                     char = string[current]
 
                 if char == '.':
                     value += char
                     current += 1
+                    position += 1
                     char = string[current]
 
                     while is_number(char):
                         value += char
                         current += 1
+                        position += 1
                         char = string[current]
 
                     tokens.append({
                         'kind': 'float',
                         'value': value,
-                        'position': current,
+                        'position': position,
                         'line': line
                     })
 
@@ -128,7 +112,7 @@ class Tokenizer:
                 tokens.append({
                     'kind': 'integer',
                     'value': value,
-                    'position': current,
+                    'position': position,
                     'line': line
                 })
                 continue
@@ -139,21 +123,21 @@ class Tokenizer:
                 while is_letter(char):
                     value += char
                     current += 1
+                    position += 1
                     char = string[current]
 
                 if value in reserved_words:
                     tokens.append({
                         "kind": value,
                         'value': value,
-                        'position': current,
+                        'position': position,
                         'line': line
                     })
-                    pass
                 elif value in data_types:
                     tokens.append({
                         'kind': 'data_type',
                         'value': value,
-                        'position': current,
+                        'position': position,
                         'line': line
                     })
                 else:
@@ -164,17 +148,56 @@ class Tokenizer:
                         'line': line
                     })
 
+                if char == ";":
+                    tokens.append({
+                        'kind': 'end_statement',
+                        'value': ';',
+                        'position': position,
+                        'line': line
+                    })
+
+                    current += 1
+                    position += 1
+                    continue
+
+                if char == "(":
+                    tokens.append({
+                        'kind': 'left_parenthesis',
+                        'value': '(',
+                        'position': position,
+                        'line': line
+                    })
+
+                    current += 1
+                    position += 1
+                    continue
+
+                if char == ")":
+                    tokens.append({
+                        'kind': 'right_parenthesis',
+                        'value': ')',
+                        'position': position,
+                        'line': line
+                    })
+
+                    current += 1
+                    position += 1
+                    continue
+
                 current += 1
                 continue
 
             if char == '#':
                 current += 1
+                position += 1
                 char = string[current]
                 while char != "#":
                     current += 1
+                    position += 1
                     char = string[current]
 
                 current += 1
+                position += 1
                 continue
 
             raise SyntaxError(f'Invalid character: {char}')

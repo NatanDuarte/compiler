@@ -33,111 +33,37 @@ end # delimits the end of programs scope
 
 ### Tokenizer output example
 
-input in interactive mode: `start var x int = 4; x = x + 2; write(x); end`
-
-```json
-[
-  {
-    "kind": "identifier",
-    "value": "start",
-    "position": 5,
-    "line": 1
-  },
-  {
-    "kind": "var",
-    "value": "var",
-    "position": 9,
-    "line": 1
-  },
-  {
-    "kind": "identifier",
-    "value": "x",
-    "position": 11,
-    "line": 1
-  },
-  {
-    "kind": "data_type",
-    "value": "int",
-    "position": 15,
-    "line": 1
-  },
-  {
-    "kind": "attribution",
-    "value": "=",
-    "position": 16,
-    "line": 1
-  },
-  {
-    "kind": "integer",
-    "value": "4",
-    "position": 19,
-    "line": 1
-  },
-  {
-    "kind": "end_statement",
-    "value": ";",
-    "position": 19,
-    "line": 1
-  },
-  {
-    "kind": "identifier",
-    "value": "x",
-    "position": 22,
-    "line": 1
-  },
-  {
-    "kind": "attribution",
-    "value": "=",
-    "position": 23,
-    "line": 1
-  },
-  {
-    "kind": "identifier",
-    "value": "x",
-    "position": 26,
-    "line": 1
-  },
-  {
-    "kind": "operator",
-    "value": "+",
-    "position": 27,
-    "line": 1
-  },
-  {
-    "kind": "integer",
-    "value": "2",
-    "position": 30,
-    "line": 1
-  },
-  {
-    "kind": "end_statement",
-    "value": ";",
-    "position": 30,
-    "line": 1
-  },
-  {
-    "kind": "identifier",
-    "value": "write",
-    "position": 37,
-    "line": 1
-  },
-  {
-    "kind": "identifier",
-    "value": "x",
-    "position": 39,
-    "line": 1
-  },
-  {
-    "kind": "end_statement",
-    "value": ";",
-    "position": 40,
-    "line": 1
-  },
-  {
-    "kind": "end",
-    "value": "end",
-    "position": 45,
-    "line": 1
-  }
-]
+```python
+{
+  'kind': 'init', 
+  'value': 'init', 
+  'position': 4, 
+  'line': 2
+}
+{'kind': 'var', 'value': 'var', 'position': 7, 'line': 3}
+{'kind': 'identifier', 'value': 'x', 'position': 62, 'line': 3}
+{'kind': 'data_type', 'value': 'int', 'position': 11, 'line': 3}
+{'kind': 'attribution', 'value': '=', 'position': 11, 'line': 3}
+{'kind': 'integer', 'value': '5', 'position': 14, 'line': 3}
+{'kind': 'end_statement', 'value': ';', 'position': 14, 'line': 3}
+{'kind': 'var', 'value': 'var', 'position': 7, 'line': 4}
+{'kind': 'identifier', 'value': 'y', 'position': 81, 'line': 4}
+{'kind': 'data_type', 'value': 'int', 'position': 11, 'line': 4}
+{'kind': 'attribution', 'value': '=', 'position': 11, 'line': 4}
+{'kind': 'integer', 'value': '5', 'position': 14, 'line': 4}
+{'kind': 'end_statement', 'value': ';', 'position': 14, 'line': 4}
+{'kind': 'var', 'value': 'var', 'position': 7, 'line': 6}
+{'kind': 'identifier', 'value': 'z', 'position': 101, 'line': 6}
+{'kind': 'data_type', 'value': 'int', 'position': 11, 'line': 6}
+{'kind': 'attribution', 'value': '=', 'position': 11, 'line': 6}
+{'kind': 'identifier', 'value': 'x', 'position': 109, 'line': 6}
+{'kind': 'operator', 'value': '+', 'position': 14, 'line': 6}
+{'kind': 'identifier', 'value': 'y', 'position': 113, 'line': 6}
+{'kind': 'end_statement', 'value': ';', 'position': 16, 'line': 6}
+{'kind': 'write', 'value': 'write', 'position': 9, 'line': 8}
+{'kind': 'left_parenthesis', 'value': '(', 'position': 9, 'line': 8}
+{'kind': 'identifier', 'value': 'z', 'position': 127, 'line': 8}
+{'kind': 'right_parenthesis', 'value': ')', 'position': 11, 'line': 8}
+{'kind': 'end_statement', 'value': ';', 'position': 12, 'line': 8}
+{'kind': 'end', 'value': 'end', 'position': 3, 'line': 9}
 ```

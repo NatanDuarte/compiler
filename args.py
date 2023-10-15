@@ -1,5 +1,3 @@
-import os
-
 from json import dumps
 from core.compiler import Compiler
 
@@ -9,15 +7,23 @@ def process_interactive_mode():
         program = input(">> ")
         if program.lower() == "exit":
             break
-        out = Compiler().compile(program)
-        print(f"{dumps(out, indent=2)}")
+        out, recognized = Compiler().compile(program)
+        # print(f"{dumps(out, indent=2)}")
+        for x in out:
+            print(x)
+        print('------------------------------')
+        print(f'Recognized: {recognized}')
 
 def process_file_mode(file_path):
     try:
         with open(file_path, 'r') as file:
             file_content = file.read()
-            out = Compiler().compile(file_content)
-            print(f"{dumps(out, indent=2)}")
+            out, recognized = Compiler().compile(file_content)
+            # print(f"{dumps(out, indent=2)}")
+            for x in out:
+                print(x)
+            print('------------------------------')
+            print(f'Recognized: {recognized}')
 
     except FileNotFoundError:
         print(f"Arquivo '{file_path}' não encontrado.")
