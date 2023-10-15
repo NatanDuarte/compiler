@@ -1,9 +1,10 @@
 #isso e um comentario#
-start
+init
     #escopo do programa#
-    var x int = 3;
-    var y int = 7;
-    var z = x + y - 0.5;
+    var x int = 5;
+    var y int = 5;
+
+    var z int = x + y;
 
     write(z);
 end
