@@ -2,11 +2,11 @@ from core.util import is_number, is_letter
 
 
 reserved_words = [
-    'init', 'end', 'var', 'write'
+    'awakeHero', 'sealDarkness', 'takeThis', 'heyListen'
 ]
 
 data_types = [
-    'int', 'float'
+    'rupees', 'zoras'
 ]
 
 class Tokenizer:
@@ -101,7 +101,7 @@ class Tokenizer:
                         char = string[current]
 
                     tokens.append({
-                        'kind': 'float',
+                        'kind': 'zoras',
                         'value': value,
                         'position': position,
                         'line': line
@@ -110,7 +110,7 @@ class Tokenizer:
                     continue
 
                 tokens.append({
-                    'kind': 'integer',
+                    'kind': 'rupees',
                     'value': value,
                     'position': position,
                     'line': line
@@ -190,11 +190,15 @@ class Tokenizer:
             if char == '#':
                 current += 1
                 position += 1
+                line -= 1
                 char = string[current]
                 while char != "#":
                     current += 1
                     position += 1
                     char = string[current]
+
+                    if char == "\n" or char == "\r":
+                        line -= 1
 
                 current += 1
                 position += 1

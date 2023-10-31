@@ -7,23 +7,23 @@ class Parser:
         self.token_count = len(tokens)
 
         self.token_handlers = {
-            "init": self.parse_init,
-            "var": self.parse_var,
-            "write": self.parse_write,
+            "awakeHero": self.parse_init,
+            "takeThis": self.parse_var,
+            "heyListen": self.parse_write,
             "identifier": self.parse_identifier,
             "data_type": self.parse_data_type,
             "attribution": self.parse_attribution,
-            "integer": self.parse_integer,
-            "float": self.parse_float,
+            "rupees": self.parse_integer,
+            "zoras": self.parse_float,
             "operator": self.parse_operator,
             "end_statement": self.parse_end_statement,
-            "end": self.parse_end,
+            "sealDarkness": self.parse_end,
         }
 
     def parse(self):
         self.advance()
         self.program()
-        return self.current_token["kind"] == "end" and not self.is_error
+        return self.current_token["kind"] == "sealDarkness" and not self.is_error
 
     def advance(self):
         if self.index < self.token_count:
@@ -31,17 +31,17 @@ class Parser:
             self.index += 1
 
     def program(self):
-        self.expect("init")
+        self.expect("awakeHero")
         self.commands()
-        self.expect("end")
+        self.expect("sealDarkness")
 
     def commands(self):
-        while self.current_token["kind"] in ["var", "identifier", "write", "attribution"]:
+        while self.current_token["kind"] in ["takeThis", "identifier", "heyListen", "attribution"]:
             if self.is_error:
                 break
-            if self.current_token["kind"] == "var":
+            if self.current_token["kind"] == "takeThis":
                 self.parse_var()
-            elif self.current_token["kind"] == "write":
+            elif self.current_token["kind"] == "heyListen":
                 self.parse_write()
             elif self.current_token["kind"] == "identifier":
                 self.advance()
@@ -105,13 +105,13 @@ class Parser:
                 self.advance()
                 self.term()
             else:
-                self.error('invalid expression')
+                self.error(f'invalid expression at line {self.current_token["line"]}')
 
     def term(self):
-        if self.current_token["kind"] in ["integer", "float", "identifier"]:
+        if self.current_token["kind"] in ["rupees", "zoras", "identifier"]:
             self.advance()
         else:
-            self.error("Invalid term")
+            self.error(f'Invalid term at line {self.current_token["line"]}')
 
     def expect(self, expected_kind):
         if self.current_token["kind"] == expected_kind:

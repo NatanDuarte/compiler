@@ -1,0 +1,13 @@
+#isso e um comentario#
+awakeHero # open scope #
+    #escopo do programa#
+    takeThis x rupees = 5; # integer variable #
+    takeThis y rupees = 4;
+
+    takeThis a zoras = 5.5; # float variable #
+
+    takeThis z rupees = x + y;
+
+    heyListen(a); # print #
+    heyListen(z);
+sealDarkness # close scope #

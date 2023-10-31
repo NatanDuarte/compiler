@@ -1,10 +1,10 @@
-#isso e um comentario#
-init
+awakeHero
     #escopo do programa#
-    var x int = 5;
-    var y int = 5;
+    takeThis x rupees = 5;
+    takeThis y rupees = 5;
 
-    var z int = x + y;
+    takeThis z rupees = x + y;
 
-    write(z);
-end
+    heyListen(z);
+sealDarkness
+#isso e um comentario#
