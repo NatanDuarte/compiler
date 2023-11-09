@@ -1,4 +1,11 @@
 # Compiler
+Integrantes:
+Alexia Cassiane de Siqueira Lima,
+Carla Kremer de Oliveira,
+Guilherme Henrique Custodio,
+Natan Duarte Procópio,
+Vinícius Felipe Momo
+
 
 ## Modo interativo
 
