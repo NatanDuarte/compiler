@@ -1,3 +1,5 @@
+# Soma #
+#isso e um comentario#
 awakeHero
     #escopo do programa#
     takeThis x rupees = 5;
@@ -7,4 +9,3 @@ awakeHero
 
     heyListen(z);
 sealDarkness
-#isso e um comentario#

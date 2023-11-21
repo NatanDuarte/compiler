@@ -1,0 +1,5 @@
+sucesso:
+awakeHero takeThis x rupees = 5; heyListen(x); sealDarkness 
+
+erro:
+awakeHero takeThis x rupees = 5 heyListen(x); sealDarkness

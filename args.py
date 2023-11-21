@@ -7,6 +7,9 @@ def process_interactive_mode():
         program = input(">> ")
         if program.lower() == "exit":
             break
+        if (program.strip() == ''):
+            print("Can't compile empty code or null")
+            continue
         recognized = Compiler().compile(program)
         print('------------------------------')
         print(f'Recognized: {recognized}')
